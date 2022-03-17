@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html> <head> <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+</style>
+<title> queue page </title>
+</head>
+
+<body>
+    <h2 style="background-color:chartreuse;"> Sasank Srinivas builds a reversed queue </h2>
+    <div class="flex-container" id="target">
+        <div class="queue">row item 1</div>
+        <div class="queue">row item 2</div>
+        <div class="queue">row item 3</div>
+    </div>
+    </div>
+    <br>
+    <p> Press the button to create an new element of type div and then add it to the container.</p>
+    <br>
+    <input type="text" id="form_text" name="form_text">
+    <button onclick="makeNewDiv()"> Add value </button>
+    <br> <br>
+    <button onclick="fetchItem()"> Fetch</button>
+    <button onclick="zap()"> Zap values</button>
+
+
+</body>
+<script>
+    function makeNewDiv() {
+        let element = document.createElement("div")
+        element.innerHTML = document.getElementById("form_text").value;
+        element.setAttribute('class', 'queue');
+        element.style.color = "Black"
+
+        /* add it to the container */
+        let container = document.getElementById('target')
+        container.insertBefore(element, container.firstChild);
+    }
+
+    function fetchItem() {
+        queueItems = document.getElementsByClassName('queue');
+        var len = queueItems.length;
+        if (len > 0) {
+            for (let s = 0; s < len; s++) {
+                queueItems[len - 1].remove();
+            }
+        }
+    }
+
+    function zap() {
+        var qItms = document.getElementsByClassName("queue")
+        var L = qItms.length;
+        var item = document.getElementById("form_text").value;
+        for (let s = 0; s < L; s++) {
+            if (item == qItms[s].innerHTML) {
+                qItms[s].remove();
+                console.log(" getting rid of all the elements with that text");
+            }
+        }
+    }
+    function Unique(){
+	var qitems = document.getElementsByClassName("queue")
+	var r=qitems.length
+    for(let cc=0;cc<r;cc++){
+		for(let aa=cc+1;aa<r;aa++){
+			
+			if(qitems[cc].innerHTML==qitems[aa].innerHTML){
+			
+				qitems[aa].remove()
+				r--;
+				aa--;
+			}
+
+		}
+	}
+}
+</script>
+
+</html>
